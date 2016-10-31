@@ -19,13 +19,10 @@ public class ExpandableArray {
  *  And I set the index started at 0; 
  */	
 	public void set(int index, Object value){
-		if(index/10 <= hsmp.size()) {
+		if(!hsmp.containsKey(index/10)) {
 			Object[] objects = new Object[10];
 			hsmp.put(index/10, objects);
 		}
-/*		for(int i = 0;i<10;i++) {
-			(hsmp.get(index/10))[i] = null;
-		}*/
 		(hsmp.get(index/10))[index%10] = value;
 	}
 	
@@ -34,11 +31,10 @@ public class ExpandableArray {
  *  error exception. 
  */ 
 	public Object get(int index) {
-		Object object = hsmp.get(index/10)[index%10];
-		if(index/10 <= hsmp.size() || object!=null){
+		if(!hsmp.containsKey(index/10) || (hsmp.get(index/10))[index%10]==null){
 			return null;
 		}
-		return object;
+		return (hsmp.get(index/10))[index%10];
 	}
 	
 	private HashMap<Integer,Object[]> hsmp = new HashMap<Integer,Object[]>();
